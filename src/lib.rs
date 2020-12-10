@@ -1,3 +1,7 @@
+//! # List
+//!
+//! `rist` is a utilities for List.
+
 use List::{Cons, Nil};
 
 #[derive(Debug, PartialEq)]
@@ -12,6 +16,19 @@ impl<T> List<T> {
     }
 }
 
+/// Construct List
+///
+/// # Examples
+///
+///
+/// ```
+/// use rist::cons;
+/// use rist::List::{Cons, Nil};
+///
+/// let list = cons(1, cons(2, Nil));
+///
+/// assert_eq!(list, Cons(1, Box::new(Cons(2, Box::new(Nil)))));
+/// ```
 pub fn cons<T>(x: T, xs: List<T>) -> List<T> {
     Cons(x, Box::new(xs))
 }
