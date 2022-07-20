@@ -11,26 +11,26 @@ pub enum List<T> {
 }
 
 impl<T> List<T> {
+    /// Construct List
+    ///
+    /// # Examples
+    ///
+    ///
+    /// ```
+    /// use rist::List;
+    /// use rist::List::{Cons, Nil};
+    ///
+    /// let list = List::cons(1, List::cons(2, Nil));
+    ///
+    /// assert_eq!(list, Cons(1, Box::new(Cons(2, Box::new(Nil)))));
+    /// ```
+    pub fn cons(x: T, xs: List<T>) -> List<T> {
+        Cons(x, Box::new(xs))
+    }
+
     pub fn iter(&self) -> Iter<T> {
         Iter { list: self }
     }
-}
-
-/// Construct List
-///
-/// # Examples
-///
-///
-/// ```
-/// use rist::cons;
-/// use rist::List::{Cons, Nil};
-///
-/// let list = cons(1, cons(2, Nil));
-///
-/// assert_eq!(list, Cons(1, Box::new(Cons(2, Box::new(Nil)))));
-/// ```
-pub fn cons<T>(x: T, xs: List<T>) -> List<T> {
-    Cons(x, Box::new(xs))
 }
 
 pub struct Iter<'a, T> {
@@ -58,14 +58,14 @@ mod tests {
 
     #[test]
     fn cons_x_list() {
-        let list = cons(1, cons(2, Nil));
+        let list = List::cons(1, List::cons(2, Nil));
 
         assert_eq!(list, Cons(1, Box::new(Cons(2, Box::new(Nil)))));
     }
 
     #[test]
     fn next_list() {
-        let list = cons(1, cons(2, Nil));
+        let list = List::cons(1, List::cons(2, Nil));
         let mut list_iter = list.iter();
 
         assert_eq!(list_iter.next(), Some(&1));
